@@ -1,0 +1,16 @@
+digraph D {
+
+
+	graph [bgcolor="#251F1F", margin=0.5];
+	edge  [color=white, fontcolor=white];
+	node  [color=white, fontcolor=white, shape=box];
+
+	A [label="test"];
+
+	A -> B;
+	A -> C;
+	A -> D;
+	D -> B;
+
+}
+
