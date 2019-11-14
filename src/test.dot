@@ -1,16 +1,27 @@
 digraph D {
-
+	// https://www.graphviz.org/doc/info/shapes.html
+	rankdir=LR;
 
 	graph [bgcolor="#251F1F", margin=0.5];
 	edge  [color=white, fontcolor=white];
 	node  [color=white, fontcolor=white, shape=box];
 
-	A [label="test"];
+	FS1, FS2, FS3, FS4 [shape=cylinder];
+	AlpDB [shape=cylinder];
+	Kafka [shape=cds];
+	Browser1, Browser2, Browser3 [shape=folder];
 
-	A -> B;
-	A -> C;
-	A -> D;
-	D -> B;
+	FS1 -> RabbitMq1;
+	FS2 -> RabbitMq2;
+	FS3 -> RabbitMq3;
+	FS4 -> RabbitMq4;
 
+	RabbitMq1, RabbitMq2, RabbitMq3, RabbitMq4 -> Kafka
+
+	FS1, FS2, FS3, FS4 -> CronSync -> Kafka;
+
+	Kafka -> KafkaConsumerDbSync -> AlpDB;
+	AlpDB -> AlpBackend -> AlpDB;
+	AlpBackend -> Browser1, Browser2, Browser3;
 }
 
